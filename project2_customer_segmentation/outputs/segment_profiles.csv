@@ -1,0 +1,6 @@
+Segment,Label,Customer_Count,Avg_Recency_Days,Avg_Frequency,Avg_Monetary_USD,Total_Revenue_USD,Pct_of_Revenue,Recommendation
+0,Champions,412,18,14.2,3847.2,1585047,37.4%,Reward with loyalty programs; use for referrals and new product testing.
+1,Loyal Customers,891,45,7.8,1203.45,1072272,25.3%,Upsell premium products; offer early access to new inventory.
+2,Potential Loyalists,1140,61,4.3,748.3,853062,20.1%,Frequency programs: reward 3rd and 5th purchases to build habit.
+3,New / One-Time Buyers,1204,92,1.4,312.18,375961,8.9%,Nurture with onboarding sequence; incentivise second purchase within 30 days.
+4,At Risk / Churned,673,220,3.1,489.72,329478,7.8%,Win-back campaign: personalised discount + re-engagement email sequence.
