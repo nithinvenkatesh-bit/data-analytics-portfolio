@@ -1,0 +1,9 @@
+KPI,Default Threshold (0.50),Tuned Threshold (0.42)
+Fraud Detection Rate (Recall),79.42%,86.01%
+Precision,87.31%,91.18%
+False Positive Rate,1.24%,0.89%
+F1 Score,0.8318,0.8851
+ROC-AUC,0.9742,0.9742
+True Positives (Caught Fraud),153,166
+False Positives (Noise),22,16
+Missed Fraud (FN),39,27
