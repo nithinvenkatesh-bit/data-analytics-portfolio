@@ -38,11 +38,11 @@ def load_and_validate(filepath: str) -> pd.DataFrame:
     # Row-level quality checks — flag rather than silently drop
     issues = []
     if df.duplicated().sum() > 0:
-        issues.append(f"  ⚠️  {df.duplicated().sum()} duplicate rows detected")
+        issues.append(f"  {df.duplicated().sum()} duplicate rows detected")
     if df['Amount'].min() < 0:
-        issues.append("  ⚠️  Negative transaction amounts detected")
+        issues.append("  Negative transaction amounts detected")
     if df['Class'].nunique() != 2:
-        issues.append("  ⚠️  Unexpected class values in target column")
+        issues.append(" Unexpected class values in target column")
 
     if issues:
         print("[QUALITY CHECKS] Issues found:")
