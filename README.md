@@ -49,4 +49,4 @@ Each project follows the same pattern:
 
 - **Email:** nithinvenkatesh203@gmail.com
 - **LinkedIn:** [linkedin.com/in/nthiv](https://www.linkedin.com/in/nthiv/)
-- **Location:** Philadelphia, PA (Open to Relocate)
+- **Location:** San Francisco, CA (Open to Relocate)
