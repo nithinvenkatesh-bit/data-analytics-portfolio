@@ -1,102 +1,77 @@
-# Customer Segmentation — K-Means Clustering + PCA
+# E-Commerce Analytics (Olist) — Revenue, Cohort Retention & Vendor Delivery
 
-Segments 4,300+ retail customers into distinct behavioural profiles using RFM (Recency, Frequency, Monetary) feature engineering, K-Means clustering, and PCA validation. Each segment is profiled with revenue contribution and actionable business recommendations.
+Analytics on the [Olist Brazilian E-Commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+(99,441 orders; 96,478 delivered). Monthly revenue trend, cohort-retention
+analysis, and vendor delivery performance, exported for Tableau. **Currency is
+Brazilian Reais (R$).** All figures are produced by the committed code on the real data.
+
+---
+
+## Headline Findings (real data)
+
+- **Revenue** scaled from R$46K/month (late 2016) to a Black-Friday peak of
+  **R$1.15M** (Nov 2017), holding ~R$1M/month through 2018; R$15.4M total across
+  delivered orders.
+- **Repeat purchase is near zero — 3.0%** of customers ever place a second
+  order. Month-1 cohort retention is ~5%, collapsing to <1% by month 2. This is
+  the defining trait of the Olist marketplace and the most important insight in
+  the project: acquisition, not retention, drives this business.
+- **Delivery**: 92% of delivered orders arrived on or before the estimated date,
+  measured across 1,238 sellers with 10+ orders.
 
 ---
 
 ## What This Project Does
 
-Raw transaction data doesn't tell you who your customers are. This project builds RFM features from invoice-level data, uses Elbow + Silhouette analysis to find the right number of clusters, validates the segments visually with PCA, and translates cluster numbers into business language — Champions, Loyal Customers, At Risk, etc. — with a specific recommendation for each.
+- **`data_prep_for_tableau.py`** — loads Olist, builds the master delivered-order
+  table, and produces the revenue trend, cohort matrix, and vendor-delivery
+  outputs plus Tableau CSVs and two charts.
+- **`ecommerce_analytics.sql`** — Snowflake SQL. **Part A** (revenue, cohort,
+  repeat rate, vendor delivery) runs on the real Olist tables. **Part B** (funnel,
+  A/B-test Z-test) are clearly-labelled illustrative templates for a production
+  analytics schema — Olist has no session, channel, or experiment data, so they
+  demonstrate the pattern rather than producing Olist numbers.
 
 ---
 
 ## Project Structure
 
 ```
-project2_customer_segmentation/
-│
-├── customer_segmentation.py     # Full pipeline — RFM → clustering → PCA → profiles
-├── data/
-│   └── online_retail_II.xlsx    # Download from UCI (link below — not committed)
-├── outputs/                     # Auto-generated on run
-│   ├── optimal_k_selection.png  # Elbow + Silhouette charts
-│   ├── pca_validation.png       # 2D PCA cluster plot
-│   ├── revenue_by_segment.png   # Revenue contribution by segment
-│   ├── segment_summary.csv      # Raw cluster means
-│   ├── segment_profiles.csv     # Labelled segments + recommendations
-│   └── customers_with_segments.csv
+project3_ecommerce_analytics/
+├── data_prep_for_tableau.py      # revenue + cohort + vendor delivery → charts + CSVs
+├── ecommerce_analytics.sql       # Part A (real Olist) + Part B (illustrative)
+├── data/                         # 9 Olist CSVs (Kaggle; not committed)
+├── outputs/
+│   ├── monthly_revenue_trend.png
+│   ├── cohort_retention_heatmap.png
+│   ├── tableau_monthly_kpis.csv
+│   ├── tableau_cohort_retention.csv
+│   ├── tableau_vendor_delivery.csv
+│   └── tableau_orders.csv
 └── requirements.txt
 ```
-
----
-
-## Key Techniques
-
-| Area | Approach |
-|---|---|
-| Feature Engineering | RFM (Recency, Frequency, Monetary) from raw invoice transactions |
-| Data Quality | Row-level checks — nulls, negative quantities, cancelled invoices removed |
-| Scaling | StandardScaler before clustering (K-Means is distance-based) |
-| Optimal K | Elbow Method + Silhouette Score — both evaluated together |
-| Clustering | K-Means with `n_init=10`, `random_state=42` for reproducibility |
-| Validation | PCA to 2 components — visual separation confirms real cluster structure |
-| Output | Human-readable segment labels + revenue analysis + business recommendations |
-
----
-
-## Sample Output — Segment Profiles
-
-| Segment | Label | Customers | Avg Recency | Avg Frequency | Avg Spend |
-|---|---|---|---|---|---|
-| 0 | Champions | 412 | 18 days | 14.2 | $3,847 |
-| 1 | Loyal Customers | 891 | 45 days | 7.8 | $1,203 |
-| 2 | At Risk / Churned | 673 | 220 days | 3.1 | $489 |
-| 3 | New / One-Time Buyers | 1,204 | 92 days | 1.4 | $312 |
-| 4 | Potential Loyalists | 1,140 | 61 days | 4.3 | $748 |
-
-> Exact values vary by dataset version. Run the pipeline to get your results.
 
 ---
 
 ## Setup & Run
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/nithinvenkatesh/portfolio.git
-cd project2_customer_segmentation
-
-# 2. Install dependencies
 pip install -r requirements.txt
-
-# 3. Download dataset
-# Go to: https://archive.ics.uci.edu/dataset/502/online+retail+ii
-# Place online_retail_II.xlsx in the /data folder
-
-# 4. Run
-python customer_segmentation.py
+# place the 9 Olist CSVs in data/  (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+python data_prep_for_tableau.py
 ```
 
----
-
-## Tableau Dashboard
-
-The `outputs/customers_with_segments.csv` file is designed to connect directly to Tableau Public for interactive exploration.
-
-**Recommended views to build:**
-- Segment size and revenue contribution (bar chart)
-- RFM scatter plot coloured by segment
-- Recency vs Monetary heatmap by segment
-- Geographic breakdown if country data is included
-
----
+## Interview talking points
+- **Uses `customer_unique_id`, not `customer_id`** — Olist issues a new
+  `customer_id` per order, so retention must key on the person-level unique id.
+- **The 3% repeat rate is the finding**, not a bug — a marketplace where nearly
+  all revenue is first-time purchase changes the strategy from retention to acquisition.
+- **Part A vs Part B SQL split** — the funnel/A/B templates are labelled as not
+  running on Olist, because the public dataset has no session or experiment data.
 
 ## Requirements
-
 ```
 pandas
 numpy
-scikit-learn
 matplotlib
-seaborn
-openpyxl
 ```
