@@ -1,6 +1,6 @@
-Segment,Label,Customer_Count,Avg_Recency_Days,Avg_Frequency,Avg_Monetary_USD,Total_Revenue_USD,Pct_of_Revenue,Recommendation
-0,Champions,412,18,14.2,3847.2,1585047,37.4%,Reward with loyalty programs; use for referrals and new product testing.
-1,Loyal Customers,891,45,7.8,1203.45,1072272,25.3%,Upsell premium products; offer early access to new inventory.
-2,Potential Loyalists,1140,61,4.3,748.3,853062,20.1%,Frequency programs: reward 3rd and 5th purchases to build habit.
-3,New / One-Time Buyers,1204,92,1.4,312.18,375961,8.9%,Nurture with onboarding sequence; incentivise second purchase within 30 days.
-4,At Risk / Churned,673,220,3.1,489.72,329478,7.8%,Win-back campaign: personalised discount + re-engagement email sequence.
+Label,Customers,Avg_Recency,Avg_Frequency,Avg_Monetary,Total_Revenue,Pct_of_Revenue,Pct_of_Customers,Recommendation
+Champions,343,12.19,20.63,13780.08,4726565.9,53.0,7.9,Reward with loyalty perks; use for referrals and new-product testing.
+Loyal Customers,944,18.55,5.8,2168.95,2047489.01,23.0,21.8,Upsell premium lines; early access to new inventory.
+Potential Loyalists,1015,104.14,3.13,1455.97,1477807.83,16.6,23.4,Frequency incentives to build the repeat-purchase habit.
+New / One-Time Buyers,851,27.99,1.61,389.04,331075.46,3.7,19.6,Onboarding sequence; drive a second purchase within 30 days.
+At Risk / Churned,1185,211.15,1.21,277.2,328487.7,3.7,27.3,Win-back: personalised discount + re-engagement emails.
