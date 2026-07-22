@@ -1,0 +1,10 @@
+Metric,Value
+ROC-AUC,0.834
+Recall@0.50,78.3%
+Precision@0.50,49.3%
+F1-opt threshold,0.61
+Recall@F1-opt,70.6%
+Precision@F1-opt,56.2%
+Contract importance share,59.7%
+High-tier churn,64.5%
+Low-tier churn,1.4%
